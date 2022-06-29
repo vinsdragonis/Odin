@@ -15,8 +15,8 @@ disk_load:
     popa
     ret
 
-%include "bootsector_print.asm"
-%include "bootsector_print_hex.asm"
+; %include "./bootsector_print.asm"
+; %include "./bootsector_print_hex.asm"
 
 disk_error:
     mov bx, DISK_ERROR
