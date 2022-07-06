@@ -2,6 +2,7 @@ make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/lenovo/Documents/GitHub/Odin'
 make: Leaving directory '/home/lenovo/Documents/GitHub/Odin'
  
-make: *** No rule to make target 'kernel/obj/kernel_entry.o', needed by 'kernel.bin'.
-make: *** No rule to make target 'kernel/obj/kernel.o', needed by 'kernel.bin'.
+make: *** No rule to make target '/boot/bootsector.asm', needed by 'bootsector.bin'.
+make: *** No rule to make target 'kernel_entry.asm', needed by 'kernel_entry.o'.
+make: *** No rule to make target 'kernel.c', needed by 'kernel.o'.
 
