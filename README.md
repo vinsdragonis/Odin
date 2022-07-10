@@ -1,2 +1,2 @@
 # Odin
-A simple multi-threaded OS
+A simple CLI based OS
