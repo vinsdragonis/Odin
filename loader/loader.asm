@@ -167,12 +167,12 @@ Data32:
 Gdt32Len: equ $-Gdt32
 
 Gdt32Ptr:
-        dw Gdt32Len-1
-        dd Gdt32
+    dw Gdt32Len-1
+    dd Gdt32
 
-Idt32Ptr: dw 0
-          dd 0
-
+Idt32Ptr:
+    dw 0
+    dd 0
 
 Gdt64:
     dq 0
@@ -180,7 +180,6 @@ Gdt64:
 
 Gdt64Len: equ $-Gdt64
 
-
 Gdt64Ptr:
-        dw Gdt64Len-1
-        dd Gdt64
+    dw Gdt64Len-1
+    dd Gdt64
