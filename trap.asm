@@ -42,9 +42,6 @@ Trap:
     push r14
     push r15
 
-    inc byte[0xb8010]
-    mov byte[0xb8011],0xe
-
     mov rdi,rsp
     call handler
 

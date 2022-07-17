@@ -3,7 +3,7 @@
 
 #include "stdint.h"
 
-struct IdtEntry {
+struct IdtEntry{
     uint16_t low;
     uint16_t selector;
     uint8_t res0;
