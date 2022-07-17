@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "//wsl$/Ubuntu/home/dragonis/Odin/Odin",
-      "program": "//wsl$/Ubuntu/home/dragonis/Odin/Odin/build/Debug/outDebug",
+      "cwd": "/home/lenovo/Documents/Odin",
+      "program": "/home/lenovo/Documents/Odin/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

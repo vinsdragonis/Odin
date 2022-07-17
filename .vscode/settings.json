@@ -1,6 +1,4 @@
 {
-  "makefile.extensionOutputFolder": "./.vscode",
-  "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",
