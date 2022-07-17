@@ -60,6 +60,7 @@ TestA20:
     cmp word[es:0x7c10],0xb200
     je End
     
+
 SetA20LineDone:
     xor ax,ax
     mov es,ax
@@ -86,7 +87,6 @@ End:
 
 
 [BITS 32]
-
 PMEntry:
     mov ax,0x10
     mov ds,ax
@@ -102,6 +102,7 @@ PMEntry:
     
     mov dword[0x70000],0x71007
     mov dword[0x71000],10000111b
+
 
     lgdt [Gdt64Ptr]
 
@@ -128,21 +129,22 @@ PEnd:
     jmp PEnd
 
 [BITS 64]
-
 LMEntry:
-    mov rsp, 0x7c00
+    mov rsp,0x7c00
 
     cld
-    mov rdi, 0x200000
-    mov rsi, 0x10000
-    mov rcx, 51200/8
+    mov rdi,0x200000
+    mov rsi,0x10000
+    mov rcx,51200/8
     rep movsq
 
     jmp 0x200000
-
+    
 LEnd:
     hlt
     jmp LEnd
+    
+    
 
 DriveId:    db 0
 ReadPacket: times 16 db 0
@@ -166,13 +168,12 @@ Data32:
     
 Gdt32Len: equ $-Gdt32
 
-Gdt32Ptr:
-    dw Gdt32Len-1
-    dd Gdt32
+Gdt32Ptr: dw Gdt32Len-1
+          dd Gdt32
 
-Idt32Ptr:
-    dw 0
-    dd 0
+Idt32Ptr: dw 0
+          dd 0
+
 
 Gdt64:
     dq 0
@@ -180,6 +181,6 @@ Gdt64:
 
 Gdt64Len: equ $-Gdt64
 
-Gdt64Ptr:
-    dw Gdt64Len-1
-    dd Gdt64
+
+Gdt64Ptr: dw Gdt64Len-1
+          dd Gdt64
