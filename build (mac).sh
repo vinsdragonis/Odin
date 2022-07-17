@@ -1,8 +1,8 @@
 nasm -f bin -o boot.bin boot.asm
-nasm -f bin -o loader.bin loader.asm
+nasm -f bin -o loader.bin ./loader/loader.asm
 nasm -f elf64 -o kernel.o kernel.asm
 nasm -f elf64 -o trapa.o trap.asm
-nasm -f elf64 -o liba.o lib.asm
+nasm -f elf64 -o liba.o ./lib/lib.asm
 /usr/local/gcc-4.8.1-for-linux64/bin/x86_64-pc-linux-gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c main.c 
 /usr/local/gcc-4.8.1-for-linux64/bin/x86_64-pc-linux-gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c trap.c 
 /usr/local/gcc-4.8.1-for-linux64/bin/x86_64-pc-linux-gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c print.c 
