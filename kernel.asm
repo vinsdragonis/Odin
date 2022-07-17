@@ -91,5 +91,3 @@ KernelEntry:
 End:
     hlt
     jmp End
-
-
