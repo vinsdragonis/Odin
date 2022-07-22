@@ -102,8 +102,13 @@ PMEntry:
     mov ecx,0x10000/4
     rep stosd
     
-    mov dword[0x70000],0x71007
-    mov dword[0x71000],10000111b
+    mov dword[0x70000], 0x71003
+    mov dword[0x71000], 10000011b
+
+    mov eax, (0xffff800000000000 >> 39)
+    and eax, 0x1ff
+    mov dword[0x70000+eax*8], 0x72003
+    mov dword[0x72000], 10000011b
 
     lgdt [Gdt64Ptr]
 
@@ -139,7 +144,8 @@ LMEntry:
     mov rcx,51200/8
     rep movsq
 
-    jmp 0x200000
+    mov rax, 0xffff800000200000
+    jmp rax
     
 LEnd:
     hlt
