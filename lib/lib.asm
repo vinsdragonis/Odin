@@ -41,4 +41,3 @@ memmove:
     rep movsb
     cld
     ret
-    

@@ -1,9 +1,10 @@
 #include "stdint.h"
 #include "stdarg.h"
 #include "print.h"
-#include "./lib/lib.h"
+#include "../lib/lib.h"
+#include "../memory/memory.h"
 
-static struct ScreenBuffer screen_buffer = {(char*)0xb8000, 0, 0};
+static struct ScreenBuffer screen_buffer = {(char*)P2V(0xb8000), 0, 0};
 
 static int udecimal_to_string(char *buffer, int position, uint64_t digits)
 {
