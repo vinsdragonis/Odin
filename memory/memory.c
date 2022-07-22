@@ -56,8 +56,6 @@ void init_memory(void)
     }
 
     total_memory = total_mem / 1024 / 1024;
-
-    // printk("Total memory is %uMB\n", total_mem / 1024 / 1024);
 }
 
 static void free_region(uint64_t v, uint64_t e)
