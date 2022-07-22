@@ -1,5 +1,5 @@
 #include "debug.h"
-#include "../print.h"
+#include "../print/print.h"
 
 void error_check(char *file, uint64_t line)
 {
