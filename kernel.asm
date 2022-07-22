@@ -1,4 +1,5 @@
 section .data
+global Tss
 
 Gdt64:
     dq 0
