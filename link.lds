@@ -4,6 +4,7 @@ ENTRY(start)
 SECTIONS
 {
     . = 0xffff800000200000;
+	
     .text : {
         *(.text)
     }
@@ -20,6 +21,6 @@ SECTIONS
     .bss : {
         *(.bss)
     }
-
+    
     PROVIDE(end = .);
 }
