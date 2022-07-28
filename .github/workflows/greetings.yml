@@ -1,0 +1,16 @@
+name: Greetings
+
+on: [pull_request_target, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: "Hey there! Thanks for your interest in this project. Your issue will be reviewed shortly, please be patient."
+        pr-message: "Hey there! Thanks for your interest in this project. Your pull request will be reviewed shortly, please be patient."
