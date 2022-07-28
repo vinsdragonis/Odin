@@ -1,4 +1,3 @@
-
 section .text
 extern handler
 global vector0
@@ -28,6 +27,8 @@ global load_idt
 global load_cr3
 global pstart
 global read_cr2
+global swap
+global TrapReturn
 
 Trap:
     push rax
@@ -197,4 +198,22 @@ pstart:
     mov rsp,rdi
     jmp TrapReturn
 
-
+swap:
+    push rbx
+    push rbp
+    push r12
+    push r13
+    push r14
+    push r15
+    
+    mov [rdi],rsp
+    mov rsp,rsi
+    
+    pop r15
+    pop r14
+    pop r13
+    pop r12
+    pop rbp
+    pop rbx
+    
+    ret 

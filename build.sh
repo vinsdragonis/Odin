@@ -10,9 +10,11 @@ gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c
 gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c ./src/memory.c -o ./obj/memory.
 gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c ./src/process.c -o ./obj/process.o
 gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c ./src/syscall.c -o ./obj/syscall.o
-ld -nostdlib -T link.lds -o kernel ./obj/kernel.o ./obj/main.o ./obj/trapa.o ./obj/trap.o ./obj/liba.o ./obj/print.o ./obj/debug.o ./obj/memory.o ./obj/process.o ./obj/syscall.o
+gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c ./src/lib.c -o ./obj/lib.o
+ld -nostdlib -T link.lds -o kernel ./obj/kernel.o ./obj/main.o ./obj/trapa.o ./obj/trap.o ./obj/liba.o ./obj/print.o ./obj/debug.o ./obj/memory.o ./obj/process.o ./obj/syscall.o ./obj/lib.o
 objcopy -O binary kernel ./bin/kernel.bin 
 dd if=./bin/boot.bin of=boot.img bs=512 count=1 conv=notrunc
 dd if=./bin/loader.bin of=boot.img bs=512 count=5 seek=1 conv=notrunc
 dd if=./bin/kernel.bin of=boot.img bs=512 count=100 seek=6 conv=notrunc
-dd if=./usr/bin/usr.bin of=boot.img bs=512 count=10 seek=106 conv=notrunc
+dd if=./usr1/bin/usr.bin of=boot.img bs=512 count=10 seek=106 conv=notrunc
+dd if=./usr2/bin/usr.bin of=boot.img bs=512 count=10 seek=116 conv=notrunc

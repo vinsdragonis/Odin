@@ -42,6 +42,19 @@ LoadUser:
     int 0x13
     jc  ReadError
 
+LoadUser2:
+    mov si,ReadPacket
+    mov word[si],0x10
+    mov word[si+2],10
+    mov word[si+4],0
+    mov word[si+6],0x3000
+    mov dword[si+8],116
+    mov dword[si+0xc],0
+    mov dl,[DriveId]
+    mov ah,0x42
+    int 0x13
+    jc  ReadError
+
 GetMemInfoStart:
     mov eax,0xe820
     mov edx,0x534d4150
