@@ -1,3 +1,5 @@
+# !/bin/bash
+
 nasm -f bin -o ./bin/boot.bin ./boot.asm
 nasm -f bin -o ./bin/loader.bin ./src/loader.asm
 nasm -f elf64 -o ./obj/kernel.o ./src/kernel.asm
