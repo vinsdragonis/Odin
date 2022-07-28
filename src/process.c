@@ -143,3 +143,37 @@ void yield(void)
     append_list_tail(list, (struct List *)process);
     schedule();
 }
+
+void sleep(int wait)
+{
+    struct ProcessControl *process_control;
+    struct Process *process;
+
+    process_control = get_pc();
+    process = process_control->current_process;
+    process->state = PROC_SLEEP;
+    process->wait = wait;
+
+    append_list_tail(&process_control->wait_list, (struct List *)process);
+    schedule();
+}
+
+void wake_up(int wait)
+{
+    struct ProcessControl *process_control;
+    struct Process *process;
+    struct HeadList *ready_list;
+    struct HeadList *wait_list;
+
+    process_control = get_pc();
+    ready_list = &process_control->ready_list;
+    wait_list = &process_control->wait_list;
+    process = (struct Process *)remove_list(wait_list, wait);
+
+    while (process != NULL)
+    {
+        process->state = PROC_READY;
+        append_list_tail(ready_list, (struct List *)process);
+        process = (struct Process *)remove_list(wait_list, wait);
+    }
+}

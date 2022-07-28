@@ -3,7 +3,8 @@
 
 #include "stdint.h"
 
-struct IdtEntry{
+struct IdtEntry
+{
     uint16_t low;
     uint16_t selector;
     uint8_t res0;
@@ -13,12 +14,14 @@ struct IdtEntry{
     uint32_t res1;
 };
 
-struct IdtPtr {
+struct IdtPtr
+{
     uint16_t limit;
     uint64_t addr;
 } __attribute__((packed));
 
-struct TrapFrame {
+struct TrapFrame
+{
     int64_t r15;
     int64_t r14;
     int64_t r13;
@@ -42,7 +45,6 @@ struct TrapFrame {
     int64_t rsp;
     int64_t ss;
 };
-
 
 void vector0(void);
 void vector1(void);
@@ -71,5 +73,6 @@ void load_idt(struct IdtPtr *ptr);
 unsigned char read_isr(void);
 uint64_t read_cr2(void);
 void TrapReturn(void);
+uint64_t get_ticks(void);
 
 #endif

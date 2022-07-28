@@ -9,6 +9,7 @@ struct Process
 	struct List *next;
 	int pid;
 	int state;
+	int wait;
 	uint64_t context;
 	uint64_t page_map;
 	uint64_t stack;
@@ -38,6 +39,7 @@ struct ProcessControl
 {
 	struct Process *current_process;
 	struct HeadList ready_list;
+	struct HeadList wait_list;
 };
 
 #define STACK_SIZE (2 * 1024 * 1024)
@@ -46,11 +48,14 @@ struct ProcessControl
 #define PROC_INIT 1
 #define PROC_RUNNING 2
 #define PROC_READY 3
+#define PROC_SLEEP 4
 
 void init_process(void);
 void launch(void);
 void pstart(struct TrapFrame *tf);
 void yield(void);
 void swap(uint64_t *prev, uint64_t next);
+void sleep(int wait);
+void wake_up(int wait);
 
 #endif
