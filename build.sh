@@ -1,18 +1,18 @@
-nasm -f bin -o boot.bin boot.asm
-nasm -f bin -o loader.bin loader.asm
-nasm -f elf64 -o kernel.o kernel.asm
-nasm -f elf64 -o trapa.o trap.asm
-nasm -f elf64 -o liba.o lib.asm
-gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c main.c 
-gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c trap.c 
-gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c print.c 
-gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c debug.c 
-gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c memory.c 
-gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c process.c 
-gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c syscall.c 
-ld -nostdlib -T link.lds -o kernel kernel.o main.o trapa.o trap.o liba.o print.o debug.o memory.o process.o syscall.o
-objcopy -O binary kernel kernel.bin 
-dd if=boot.bin of=boot.img bs=512 count=1 conv=notrunc
-dd if=loader.bin of=boot.img bs=512 count=5 seek=1 conv=notrunc
-dd if=kernel.bin of=boot.img bs=512 count=100 seek=6 conv=notrunc
-dd if=./user/user.bin of=boot.img bs=512 count=10 seek=106 conv=notrunc
+nasm -f bin -o ./bin/boot.bin ./boot.asm
+nasm -f bin -o ./bin/loader.bin ./src/loader.asm
+nasm -f elf64 -o ./obj/kernel.o ./src/kernel.asm
+nasm -f elf64 -o ./obj/trapa.o ./src/trap.asm
+nasm -f elf64 -o ./obj/liba.o ./src/lib.asm
+gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c ./src/main.c -o ./obj/main.o
+gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c ./src/trap.c  -o ./obj/trap.o
+gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c ./src/print.c  -o ./obj/print.o
+gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c ./src/debug.c  -o ./obj/debug.o
+gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c ./src/memory.c -o ./obj/memory.
+gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c ./src/process.c -o ./obj/process.o
+gcc -std=c99 -mcmodel=large -ffreestanding -fno-stack-protector -mno-red-zone -c ./src/syscall.c -o ./obj/syscall.o
+ld -nostdlib -T link.lds -o kernel ./obj/kernel.o ./obj/main.o ./obj/trapa.o ./obj/trap.o ./obj/liba.o ./obj/print.o ./obj/debug.o ./obj/memory.o ./obj/process.o ./obj/syscall.o
+objcopy -O binary kernel ./bin/kernel.bin 
+dd if=./bin/boot.bin of=boot.img bs=512 count=1 conv=notrunc
+dd if=./bin/loader.bin of=boot.img bs=512 count=5 seek=1 conv=notrunc
+dd if=./bin/kernel.bin of=boot.img bs=512 count=100 seek=6 conv=notrunc
+dd if=./user/bin/user.bin of=boot.img bs=512 count=10 seek=106 conv=notrunc

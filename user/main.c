@@ -2,6 +2,6 @@
 
 int main(void)
 {
-    printf("process starts\n");
+    printf("User process started\n");
     return 0;
 }
