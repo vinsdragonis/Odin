@@ -15,4 +15,4 @@ nasm -f elf64 -o ./obj/liba.o ./src/lib.asm
 dd if=./bin/boot.bin of=boot.img bs=512 count=1 conv=notrunc
 dd if=./bin/loader.bin of=boot.img bs=512 count=5 seek=1 conv=notrunc
 dd if=./bin/kernel.bin of=boot.img bs=512 count=100 seek=6 conv=notrunc
-dd if=./user/user.bin of=boot.img bs=512 count=10 seek=106 conv=notrunc
+dd if=./usr/usr.bin of=boot.img bs=512 count=10 seek=106 conv=notrunc

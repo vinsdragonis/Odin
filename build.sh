@@ -15,4 +15,4 @@ objcopy -O binary kernel ./bin/kernel.bin
 dd if=./bin/boot.bin of=boot.img bs=512 count=1 conv=notrunc
 dd if=./bin/loader.bin of=boot.img bs=512 count=5 seek=1 conv=notrunc
 dd if=./bin/kernel.bin of=boot.img bs=512 count=100 seek=6 conv=notrunc
-dd if=./user/bin/user.bin of=boot.img bs=512 count=10 seek=106 conv=notrunc
+dd if=./usr/bin/usr.bin of=boot.img bs=512 count=10 seek=106 conv=notrunc
