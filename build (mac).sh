@@ -1,3 +1,5 @@
+# !/bin/bash
+
 nasm -f bin -o ./bin/boot.bin ./boot.asm
 nasm -f bin -o ./bin/loader.bin ./src/loader.asm
 nasm -f elf64 -o ./obj/kernel.o ./src/kernel.asm
@@ -15,4 +17,6 @@ nasm -f elf64 -o ./obj/liba.o ./src/lib.asm
 dd if=./bin/boot.bin of=boot.img bs=512 count=1 conv=notrunc
 dd if=./bin/loader.bin of=boot.img bs=512 count=5 seek=1 conv=notrunc
 dd if=./bin/kernel.bin of=boot.img bs=512 count=100 seek=6 conv=notrunc
-dd if=./usr/usr.bin of=boot.img bs=512 count=10 seek=106 conv=notrunc
+dd if=./usr1/bin/usr.bin of=boot.img bs=512 count=10 seek=106 conv=notrunc
+dd if=./usr2/bin/usr.bin of=boot.img bs=512 count=10 seek=116 conv=notrunc
+dd if=./usr3/bin/usr.bin of=boot.img bs=512 count=10 seek=126 conv=notrunc
