@@ -20,3 +20,4 @@ dd if=./bin/loader.bin of=boot.img bs=512 count=5 seek=1 conv=notrunc
 dd if=./bin/kernel.bin of=boot.img bs=512 count=100 seek=6 conv=notrunc
 dd if=./usr1/bin/usr.bin of=boot.img bs=512 count=10 seek=106 conv=notrunc
 dd if=./usr2/bin/usr.bin of=boot.img bs=512 count=10 seek=116 conv=notrunc
+dd if=./usr3/bin/usr.bin of=boot.img bs=512 count=10 seek=126 conv=notrunc

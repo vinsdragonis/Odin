@@ -3,11 +3,9 @@
 
 int main(void)
 {
-    int64_t counter = 0;
     while (1) {
-        if (counter % 1000000 == 0)
-            printf("User 1 process started\n");
-        counter++;
+        printf("User 1 process started\n");
+        waitu();
     }
     return 0;
 }

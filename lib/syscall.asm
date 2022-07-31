@@ -1,6 +1,8 @@
 section .text
 global writeu
 global sleepu
+global exitu
+global waitu
 
 writeu:
     sub rsp,16
@@ -27,4 +29,20 @@ sleepu:
     int 0x80
 
     add rsp,8
+    ret
+
+exitu:
+    mov eax,2
+    mov rdi,0
+
+    int 0x80
+
+    ret
+
+waitu:
+    mov eax,3
+    mov rdi,0
+
+    int 0x80
+
     ret
