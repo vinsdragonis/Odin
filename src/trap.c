@@ -81,9 +81,11 @@ void handler(struct TrapFrame *tf)
         break;
 
     default:
-        // printk("[Error %d at ring %d] %d:%x %x", tf->trapno, (tf->cs & 3), tf->errorcode, read_cr2(), tf->rip);
-        while (1)
-        {
+        if ((tf->cs & 3) == 3) {
+            printk("Exception generated: %d\n", tf->trapno);
+            exit();
+        } else {
+            while (1) {}
         }
     }
 
