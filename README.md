@@ -6,7 +6,7 @@
 - Memory management
 - Keyboard support
 - Simple command line interface
-- Multi-threading
+- Multi-processing
 - FAT16 file system
 
 ## Software requirements:
