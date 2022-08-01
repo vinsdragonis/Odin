@@ -1,8 +1,5 @@
 # Odin
-### A simple CLI based Operating System built for research and development purposes
-
-## ⚠️ Disclaimer
-**This project is strictly built for only R&D purposes, the author is not responsible for any misuse of the project or damages to any system**
+**A simple CLI based Operating System built for research and development purposes**
 
 ## Features supported:
 - Real mode & protected mode
