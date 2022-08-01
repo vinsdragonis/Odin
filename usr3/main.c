@@ -7,8 +7,8 @@ int main(void)
 
     while (1)
     {
-        if (counter % 5000000 == 0)
-            printf("User 3 process started\n");
+        // if (counter % 5000000 == 0)
+        //     printf("User 3 process started\n");
         counter++;
     }
     return 0;

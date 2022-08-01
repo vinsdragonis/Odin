@@ -2,6 +2,7 @@
 #include "../include/print.h"
 #include "../include/syscall.h"
 #include "../include/process.h"
+#include "../include/keyboard.h"
 #include "../include/debug.h"
 
 static struct IdtPtr idt_pointer;
@@ -38,6 +39,7 @@ void init_idt(void)
     init_idt_entry(&vectors[18], (uint64_t)vector18, 0x8e);
     init_idt_entry(&vectors[19], (uint64_t)vector19, 0x8e);
     init_idt_entry(&vectors[32], (uint64_t)vector32, 0x8e);
+    init_idt_entry(&vectors[33], (uint64_t)vector33, 0x8e);
     init_idt_entry(&vectors[39], (uint64_t)vector39, 0x8e);
     init_idt_entry(&vectors[0x80], (uint64_t)sysint, 0xee);
 
@@ -68,6 +70,11 @@ void handler(struct TrapFrame *tf)
         eoi();
         break;
 
+    case 33:
+        keyboard_handler();
+        eoi();
+        break;
+
     case 39:
         isr_value = read_isr();
         if ((isr_value & (1 << 7)) != 0)
@@ -81,11 +88,16 @@ void handler(struct TrapFrame *tf)
         break;
 
     default:
-        if ((tf->cs & 3) == 3) {
-            printk("Exception generated: %d\n", tf->trapno);
+        if ((tf->cs & 3) == 3)
+        {
+            printk("Exception is %d\n", tf->trapno);
             exit();
-        } else {
-            while (1) {}
+        }
+        else
+        {
+            while (1)
+            {
+            }
         }
     }
 

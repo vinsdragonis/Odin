@@ -1,4 +1,3 @@
-
 section .text
 extern handler
 global vector0
@@ -20,6 +19,7 @@ global vector17
 global vector18
 global vector19
 global vector32
+global vector33
 global vector39
 global sysint
 global eoi
@@ -30,6 +30,7 @@ global pstart
 global read_cr2
 global swap
 global TrapReturn
+global in_byte
 
 Trap:
     push rax
@@ -161,6 +162,11 @@ vector32:
     push 32
     jmp Trap
 
+vector33:
+    push 0
+    push 33
+    jmp Trap
+
 vector39:
     push 0
     push 39
@@ -218,3 +224,8 @@ swap:
     pop rbx
     
     ret 
+
+in_byte:
+    mov rdx,rdi
+    in al,dx
+    ret
