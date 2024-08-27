@@ -5,16 +5,26 @@
 #include "../include/lib.h"
 #include "../include/debug.h"
 
+#define INIT_ADDR_1 0x20000
+#define INIT_ADDR_2 0x30000
+#define INIT_ADDR_3 0x40000
+
 extern struct TSS Tss;
 static struct Process process_table[NUM_PROC];
 static int pid_num = 1;
 static struct ProcessControl pc;
 
+// Set Task State Segment (TSS) for the process
 static void set_tss(struct Process *proc)
 {
+    if (proc->stack == 0) {
+        print("Error: Process stack is NULL.\n");
+        return;
+    }
     Tss.rsp0 = proc->stack + STACK_SIZE;
 }
 
+// Find an unused process slot in the process table
 static struct Process *find_unused_process(void)
 {
     struct Process *process = NULL;
@@ -31,6 +41,7 @@ static struct Process *find_unused_process(void)
     return process;
 }
 
+// Set up the initial state for a new process
 static void set_process_entry(struct Process *proc, uint64_t addr)
 {
     uint64_t stack_top;
@@ -60,17 +71,19 @@ static void set_process_entry(struct Process *proc, uint64_t addr)
     proc->state = PROC_READY;
 }
 
+// Get the process control structure
 static struct ProcessControl *get_pc(void)
 {
     return &pc;
 }
 
+// Initialize the process table and create initial processes
 void init_process(void)
 {
     struct ProcessControl *process_control;
     struct Process *process;
     struct HeadList *list;
-    uint64_t addr[3] = {0x20000, 0x30000, 0x40000};
+    uint64_t addr[3] = {INIT_ADDR_1, INIT_ADDR_2, INIT_ADDR_3};
 
     process_control = get_pc();
     list = &process_control->ready_list;
@@ -83,6 +96,7 @@ void init_process(void)
     }
 }
 
+// Launch the first process
 void launch(void)
 {
     struct ProcessControl *process_control;
@@ -98,6 +112,7 @@ void launch(void)
     pstart(process->tf);
 }
 
+// Switch from one process to another
 static void switch_process(struct Process *prev, struct Process *current)
 {
     set_tss(current);
@@ -105,6 +120,7 @@ static void switch_process(struct Process *prev, struct Process *current)
     swap(&prev->context, current->context);
 }
 
+// Schedule the next process to run
 static void schedule(void)
 {
     struct Process *prev_proc;
@@ -124,6 +140,7 @@ static void schedule(void)
     switch_process(prev_proc, current_proc);
 }
 
+// Yield the CPU to another process
 void yield(void)
 {
     struct ProcessControl *process_control;
@@ -144,6 +161,7 @@ void yield(void)
     schedule();
 }
 
+// Put the current process to sleep
 void sleep(int wait)
 {
     struct ProcessControl *process_control;
@@ -158,6 +176,7 @@ void sleep(int wait)
     schedule();
 }
 
+// Wake up processes waiting on a specific condition
 void wake_up(int wait)
 {
     struct ProcessControl *process_control;
@@ -178,6 +197,7 @@ void wake_up(int wait)
     }
 }
 
+// Terminate the current process
 void exit(void)
 {
     struct ProcessControl *process_control;
@@ -195,6 +215,7 @@ void exit(void)
     schedule();
 }
 
+// Wait for a process to be killed and clean up its resources
 void wait(void)
 {
     struct ProcessControl *process_control;
